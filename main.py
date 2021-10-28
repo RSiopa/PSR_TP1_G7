@@ -20,7 +20,7 @@ args = parser.parse_args()
 def main():
 
     if args.use_time_mode:
-        tstop = args.max_value      #max time set!
+        tstop = args.max_value      #max time set
         N = math.inf
     else:
         tstop = math.inf
