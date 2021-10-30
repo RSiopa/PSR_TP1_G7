@@ -28,7 +28,7 @@ print(args)
 
 def main():
     seconds = time()
-    print(Fore.RED + 'PSR TP1' + Style.RESET_ALL + ' Typing Test, P2, Grupo 7, ' + ctime(seconds))
+    print(Fore.RED + 'PSR TP1 ' + Fore.BLUE + ' Typing Test ' + Fore.GREEN + ' P2 Grupo 7 ' + Style.RESET_ALL + ctime(seconds))
 
     if args['use_time_mode']:       # if the user uses the time mode
         tstop = args['max_value']      # max time set
