@@ -8,6 +8,7 @@ from time import time, ctime
 import random
 import string
 from collections import namedtuple
+import json
 
 Input = namedtuple('Input', ['requested', 'received', 'duration'])
 
@@ -55,8 +56,8 @@ def main():
 
     print('Current test duration (' + str(t2-t1) + ') exceeds maximum of ' + str(args['max_value']))
     print(Fore.BLUE + 'Test Finished!' + Style.RESET_ALL)
+
     # Calcular estatísticas
-    print(save)
     test_duration = t2-t1
     test_start = ctime(t1)
     test_end = ctime(t2)
@@ -64,14 +65,33 @@ def main():
     number_of_hits = 0
     type_average_duration = 0
     type_hit_average_duration = 0
-    for i in range len(save):
+    type_miss_average_duration = 0
+    for i in range (len(save)):
         if save[i].requested == save[i].received:
             number_of_hits += 1
+            type_hit_average_duration = save[i].duration + type_hit_average_duration
+        else:
+            type_miss_average_duration = save[i].duration + type_miss_average_duration
         type_average_duration = save[i].duration + type_average_duration
 
     type_average_duration = type_average_duration/number_of_types
     accuracy = number_of_hits/number_of_types
+    if number_of_hits == number_of_types:
+        type_miss_average_duration = 0
+    else:
+        type_miss_average_duration = type_miss_average_duration / (number_of_types - number_of_hits)
+    if number_of_hits == 0:
+        type_hit_average_duration = 0
+    else:
+        type_hit_average_duration = type_hit_average_duration/number_of_hits
 
+    dic = {'accuracy': accuracy, 'inputs': save, 'number_of_hits': number_of_hits,
+           'number_of_types': number_of_types, 'test_duration': test_duration,
+           'test_end':test_end, 'test_start':test_start, 'type_average_duration':type_average_duration,
+           'type_hit_average_duration' :type_hit_average_duration, 'type_miss_average_duration:':type_miss_average_duration}
+
+    print(json.dumps(dic, sort_keys=False, indent=4))
+    print('\n' + str(save))
 
 if __name__ == '__main__':
     main()
