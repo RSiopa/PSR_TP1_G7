@@ -84,8 +84,12 @@ def main():
             type_miss_average_duration = save[i].duration + type_miss_average_duration
         type_average_duration = save[i].duration + type_average_duration
 
-    type_average_duration = type_average_duration/number_of_types
-    accuracy = number_of_hits/number_of_types
+    if number_of_types == 0:            # in case the user clicks spacebar even before typing anything
+        type_average_duration = 0
+        accuracy = 0
+    else:
+        type_average_duration = type_average_duration / number_of_types
+        accuracy = number_of_hits / number_of_types
     if number_of_hits == number_of_types:       # if user hits every key correctly
         type_miss_average_duration = 0
     else:
