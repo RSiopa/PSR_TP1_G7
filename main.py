@@ -20,34 +20,35 @@ print(args)
 
 def main():
     seconds = time()
-    print(Fore.RED + 'PARI' + Style.RESET_ALL + ' Typing Test, P2, Grupo 7, ' + ctime(seconds))
-    print('Test running up to ' + str(args['max_value']) + ' seconds.')
+    print(Fore.RED + 'PSR TP1' + Style.RESET_ALL + ' Typing Test, P2, Grupo 7, ' + ctime(seconds))
 
-    if args['use_time_mode']:
+    if args['use_time_mode']:       #if the user uses the time mode
         tstop = args['max_value']      #max time set
         N = math.inf
-    else:
+        print('Test ends after ' + Fore.GREEN + str(tstop) + Style.RESET_ALL + ' seconds')
+    else:                           #if the user uses the input mode
         tstop = math.inf
         N = args['max_value']     #max inputs set!
+        print('Test ends after ' + Fore.GREEN + str(N) + Style.RESET_ALL + ' inputs')
 
     print('Press any key to start the test')
-    readchar.readchar()
+    readchar.readchar()         #start of the test
     count = 0
     t1 = time()
     t2 = time()
     save = []
 
-    while (count < N) and (t2 - t1 < tstop):
-        to_type = random.choice(string.ascii_lowercase)
-        print('Type letter ' + to_type)
+    while (count < N) and (t2 - t1 < tstop):        #asks for letters until it hits number of inputs desired or time desired
+        to_type = random.choice(string.ascii_lowercase)     #chooses a random lower case letter for the user to type
+        print('Type letter ' + Fore.BLUE + to_type + Style.RESET_ALL)   #asks for the random letter
         t3 = time()
         typed = readchar.readchar()
         t4 = time()
-        if typed == ' ':
-            exit()
-        if typed == to_type:
+        if typed == ' ':        #if the user uses the spacebar key, the test stops
+            break
+        if typed == to_type:    #if the user typed the correct letter, letter comes in green
             print('You typed letter ' + Fore.GREEN + typed + Style.RESET_ALL)
-        else:
+        else:                   #if the user typed the wrong letter, letter comes in red
             print('You typed letter ' + Fore.RED + typed + Style.RESET_ALL)
 
         save.append(Input(requested = to_type, received = typed, duration = (t4 - t3)))
