@@ -65,7 +65,10 @@ def main():
     if typed == ' ':
         print(Fore.RED + Back.WHITE + 'SpaceBar pressed!' + Style.RESET_ALL)
     else:
-        print('Current test duration (' + str(t2-t1) + ') exceeds maximum of ' + str(args['max_value']))
+        if args['use_time_mode']:  # if the user uses the time mode
+            print('Current test duration (' + str(t2-t1) + ') exceeds maximum of ' + str(args['max_value']))
+        else:
+            print('Current test inputs reached the maximum of ' + str(args['max_value']))
     print(Fore.BLUE + 'Test Finished!' + Style.RESET_ALL)
     # Statistics' calculations
     test_duration = t2-t1
