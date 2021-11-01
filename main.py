@@ -62,10 +62,11 @@ def main():
         save.append(Input(requested = to_type, received = typed, duration = (t4 - t3))) # adds values to Input
         count = count + 1
         t2 = time()
-
-    print('Current test duration (' + str(t2-t1) + ') exceeds maximum of ' + str(args['max_value']))
+    if typed == ' ':
+        print(Fore.RED + Back.WHITE + 'SpaceBar pressed!' + Style.RESET_ALL)
+    else:
+        print('Current test duration (' + str(t2-t1) + ') exceeds maximum of ' + str(args['max_value']))
     print(Fore.BLUE + 'Test Finished!' + Style.RESET_ALL)
-
     # Statistics' calculations
     test_duration = t2-t1
     test_start = ctime(t1)
@@ -104,7 +105,7 @@ def main():
            'test_end':test_end, 'test_start':test_start, 'type_average_duration':type_average_duration,
            'type_hit_average_duration' :type_hit_average_duration, 'type_miss_average_duration:':type_miss_average_duration}
 
-    print(json.dumps(dic, sort_keys=False, indent=4))   # dictionary print
+    print(json.dumps(dic, skipkeys= True, sort_keys=False, indent=4))   # dictionary print
 
 if __name__ == '__main__':
     main()
