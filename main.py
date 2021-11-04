@@ -22,7 +22,7 @@ Input = namedtuple('Input', ['requested', 'received', 'duration'])      # initia
 
 parser = argparse.ArgumentParser(description='Definition of test mode')     # arguments
 parser.add_argument('-mv', '--max_value', type=int, required=True, help='Max number of seconds for time mode or maximum number of inputs for number of inputs mode.\n ')
-parser.add_argument('-utm', '--use_time_mode', action='store_true', help='Max number of secs for time mode or maximum number of inputs for number of inputs mode.\n ')
+parser.add_argument('-utm', '--use_time_mode', action='store_true', help='Select test to run by max time instead of max inputs.\n ')
 args = vars(parser.parse_args())
 print(args)
 
